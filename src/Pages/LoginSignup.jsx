@@ -21,20 +21,29 @@ const LoginSignup = () => {
 
     const SignUp = (e) => {
       e.preventDefault()
-        localStorage.setItem("name",formData.name)
-        localStorage.setItem("email",formData.email)
-        localStorage.setItem("password",formData.password)
-        navigate("/")
+        const email = localStorage.getItem("email")
+        if(formData.email === email){
+            alert("already signed In with this account")
+        }
+        else{
+            localStorage.setItem("name",formData.name)
+            localStorage.setItem("email",formData.email)
+            localStorage.setItem("password",formData.password)
+            localStorage.setItem("signinemail",formData.email )
+            navigate("/")
+        }
 
     }
   function SignIn(e){
       e.preventDefault()
       const email = localStorage.getItem("email")
       const password = localStorage.getItem("password")
+
       if (password !== formData.password || email !== formData.email){
           alert("Wrong credentials")
       }
       else {
+          localStorage.setItem("signinemail",formData.email )
           navigate("/")
       }
   }
