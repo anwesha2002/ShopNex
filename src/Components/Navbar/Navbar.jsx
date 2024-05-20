@@ -27,6 +27,14 @@ const Navbar = () => {
         }
     };
 
+    const credentials = localStorage.getItem("email")
+
+    const LogOutClick = () => {
+        localStorage.setItem("name " , "")
+        localStorage.setItem("email " , "")
+        localStorage.setItem("password " , "")
+    }
+
     return (
         <div className={`navbar`} id="nav">
             <div className="nav-logo">
@@ -54,7 +62,10 @@ const Navbar = () => {
                 </li>
             </ul>
             <div className="nav-login-cart">
-                <Link to='/login'><button className='log_btn'>Login</button></Link>
+                {credentials !== ""? <Link to='/login'><button onClick={LogOutClick} className='log_btn'>Log Out</button></Link> :
+                    <Link to='/login'>
+                    <button className='log_btn'>Login</button>
+                </Link>}
                 <Link to='/cart'><img src={icon} alt="" className='cart' /></Link>
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
                 <div className='dark_btn'>
